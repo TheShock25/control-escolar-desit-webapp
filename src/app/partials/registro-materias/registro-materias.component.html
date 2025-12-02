@@ -1,0 +1,152 @@
+<div class="wrapper">
+  <div class="reg-shell">
+    <mat-card class="role-card">
+      <mat-card-header class="role-card-header">
+        <div class="actions-header-colum">
+          <ng-container *ngIf="!editar; else activo">
+            <mat-card-title class="title-card">Registro de materia</mat-card-title>
+            <mat-card-subtitle class="subtitle-card">
+              Ingresa los datos de la materia
+            </mat-card-subtitle>
+          </ng-container>
+          <ng-template #activo>
+            <mat-card-title class="title-card">Editar materia</mat-card-title>
+            <mat-card-subtitle class="subtitle-card">
+              Modifica los datos de la materia seleccionada
+            </mat-card-subtitle>
+          </ng-template>
+        </div>
+        <div class="actions-row">
+          <button mat-icon-button class="back-btn" (click)="regresar()">
+            <mat-icon class="back-icon">arrow_back</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="forms-area">
+          <div class="form-content">
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>NRC</mat-label>
+                <input matInput [(ngModel)]="materia.nrc" mask="00000" name="nrc" placeholder="Escribe el NRC">
+              </mat-form-field>
+              <div *ngIf="errors.nrc" class="invalid-feedback">{{ errors.nrc }}</div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Nombre de la materia</mat-label>
+                <input matInput [(ngModel)]="materia.nombre" placeholder="Escribe el nombre de la materia">
+              </mat-form-field>
+              <div *ngIf="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Sección</mat-label>
+                <input matInput [(ngModel)]="materia.seccion" mask="000" placeholder="Escribe la sección">
+              </mat-form-field>
+              <div *ngIf="errors.seccion" class="invalid-feedback">{{ errors.seccion }}</div>
+            </div>
+
+            <!-- Días de la semana -->
+            <div class="form-row select-dias">
+              <div class="dias-header">
+                <label class="title-materias" for="dias_semana">Selecciona los días de clase</label>
+              </div>
+              <div class="checkbox-container">
+                <div class="checkbox-group" *ngFor="let dia of diasSemana; let i = index">
+                  <mat-checkbox class="checkbox-item opc-sc" name="opsc"
+                               (change)="checkboxDiasChange($event)"
+                               value="{{dia.value}}"
+                               [checked]="revisarDiaSeleccionado(dia.value)">
+                    <div class="d-checkbox-nombre">{{dia.nombre}}</div>
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div *ngIf="errors.dias_json" class="invalid-feedback">{{ errors.dias_json }}</div>
+            </div>
+
+            <!-- Horario con Timepicker mejorado -->
+            <div class="form-row horario-row">
+              <div class="horario-container">
+                <!-- Hora Inicio -->
+                <mat-form-field class="time-input" appearance="outline">
+                  <mat-label>Hora inicio</mat-label>
+                  <input matInput
+                         type="time"
+                         [(ngModel)]="materia.hora_inicio"
+                         placeholder="HH:MM"
+                         class="time-picker">
+                  <mat-icon matSuffix class="time-icon">access_time</mat-icon>
+                </mat-form-field>
+                <div *ngIf="errors.hora_inicio" class="invalid-feedback">{{ errors.hora_inicio }}</div>
+
+                <!-- Hora Final -->
+                <mat-form-field class="time-input" appearance="outline">
+                  <mat-label>Hora final</mat-label>
+                  <input matInput
+                         type="time"
+                         [(ngModel)]="materia.hora_final"
+                         placeholder="HH:MM"
+                         class="time-picker">
+                  <mat-icon matSuffix class="time-icon">access_time</mat-icon>
+                </mat-form-field>
+                <div *ngIf="errors.hora_final" class="invalid-feedback">{{ errors.hora_final }}</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Salón</mat-label>
+                <input matInput [(ngModel)]="materia.salon" placeholder="Escribe el salón">
+              </mat-form-field>
+              <div *ngIf="errors.salon" class="invalid-feedback">{{ errors.salon }}</div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Programa educativo</mat-label>
+                <mat-select [(ngModel)]="materia.programa_educativo">
+                  <mat-option *ngFor="let programa of programasEducativos" [value]="programa.value">
+                    {{programa.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="errors.programa_educativo" class="invalid-feedback">{{ errors.programa_educativo }}</div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Profesor asignado</mat-label>
+                <mat-select [(ngModel)]="materia.profesor_asignado">
+                  <mat-option value="">Selecciona un profesor</mat-option>
+                  <mat-option *ngFor="let profesor of listaProfesores" [value]="profesor.id">
+                    {{profesor.user?.first_name}} {{profesor.user?.last_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="errors.profesor_asignado" class="invalid-feedback">{{ errors.profesor_asignado }}</div>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Créditos</mat-label>
+                <input matInput [(ngModel)]="materia.creditos" mask="0" placeholder="Escribe los créditos">
+              </mat-form-field>
+              <div *ngIf="errors.creditos" class="invalid-feedback">{{ errors.creditos }}</div>
+            </div>
+
+            <div class="section-buttons">
+              <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+              <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
+              <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="actualizar()">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

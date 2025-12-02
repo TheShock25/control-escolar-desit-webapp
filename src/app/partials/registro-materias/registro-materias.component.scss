@@ -1,0 +1,317 @@
+.wrapper {
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('/assets/images/fondo-azul.jpg');
+  background-position: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.reg-shell {
+  display: grid;
+  gap: 20px;
+  padding: clamp(16px, 3vw, 28px);
+}
+
+/* Tarjeta principal */
+.role-card {
+  width: min(100%, 980px);
+  margin-inline: auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  .role-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+    padding-bottom: 8px;
+  }
+
+  .actions-header-colum {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .title-card {
+    width: 100%;
+    font-family: Nexa-Bold, Arial, sans-serif;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    margin-bottom: 0.25rem;
+    color: #231F20;
+  }
+
+  .subtitle-card {
+    width: 100%;
+    font-family: Nexa-Light, Arial, sans-serif;
+    font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+    color: #000000;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Botón regresar */
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-btn {
+  border-radius: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  width: auto !important;
+  height: auto !important;
+  font-size: 1.9rem;
+  color: #0092B8;
+}
+
+/* Área de formularios */
+.forms-area {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mat-input {
+  width: 100% !important;
+  height: 48px !important;
+}
+
+/* Días de la semana */
+.select-dias {
+  .dias-header {
+    margin-bottom: 1rem;
+  }
+
+  .title-materias {
+    font-family: Nexa-Bold, Arial, sans-serif;
+    font-size: 1.1rem;
+    color: #231F20;
+  }
+
+  .checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .checkbox-group {
+    margin-bottom: 0.5rem;
+  }
+
+  .d-checkbox-nombre {
+    font-family: Nexa, Arial, sans-serif;
+    font-size: 1rem;
+    color: #231F20;
+  }
+}
+
+/* Horario con Timepicker mejorado */
+.horario-row {
+  .horario-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .time-input {
+    width: 100% !important;
+
+    // Estilos para el input de tiempo
+    .time-picker {
+      cursor: pointer;
+
+      // Estilos para el ícono del reloj
+      &::-webkit-calendar-picker-indicator {
+        background: none;
+        display: none;
+      }
+    }
+
+    .time-icon {
+      color: #0092B8;
+      cursor: pointer;
+
+      &:hover {
+        color: #017895;
+      }
+    }
+  }
+}
+
+/* Botones */
+.section-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0 1rem;
+  gap: 1rem;
+}
+
+.btn-primary {
+  width: 208px;
+  height: 48px;
+  background-color: #0092B8 !important;
+  border-color: #0092B8 !important;
+  border-radius: 8px !important;
+  font-family: Nexa-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+
+  &:hover {
+    background-color: #017895 !important;
+    border-color: #017895 !important;
+  }
+}
+
+.btn-danger {
+  width: 208px;
+  height: 48px;
+  border-radius: 8px !important;
+  font-family: Nexa-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+/* Mensajes de error */
+.invalid-feedback {
+  color: #dc3545;
+  font-family: Nexa, Arial, sans-serif;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  margin-left: 0;
+}
+
+/* Estilos específicos para el timepicker nativo */
+::ng-deep {
+  // Mejora la apariencia del timepicker nativo
+  input[type="time"] {
+    &::-webkit-datetime-edit-fields-wrapper {
+      padding: 0 8px;
+    }
+
+    &::-webkit-datetime-edit-text {
+      padding: 0 4px;
+    }
+
+    &::-webkit-datetime-edit-hour-field,
+    &::-webkit-datetime-edit-minute-field,
+    &::-webkit-datetime-edit-ampm-field {
+      padding: 0 2px;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      background: transparent;
+      bottom: 0;
+      color: transparent;
+      cursor: pointer;
+      height: auto;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: auto;
+    }
+  }
+
+  // Estilos para el mat-form-field
+  .mat-form-field-outline {
+    border-radius: 8px !important;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* =========================
+   Ajustes para la vista móvil (≤700px)
+   ========================= */
+@media (max-width: 700px) {
+  .reg-shell {
+    padding: 12px;
+  }
+
+  .role-card {
+    padding: 15px;
+  }
+
+  .role-card-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .actions-row {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .horario-row .horario-container {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .checkbox-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-primary,
+  .btn-danger {
+    width: 100%;
+  }
+
+  .title-card {
+    text-align: center;
+  }
+
+  .subtitle-card {
+    text-align: center;
+  }
+
+  // Mejoras para timepicker en móvil
+  input[type="time"] {
+    font-size: 16px; // Evita zoom en iOS
+  }
+}
+
+// Estilos para cuando el timepicker está enfocado
+.time-input.mat-form-field.mat-focused {
+  .time-icon {
+    color: #017895;
+  }
+}
