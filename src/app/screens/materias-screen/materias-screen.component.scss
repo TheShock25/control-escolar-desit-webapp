@@ -52,19 +52,21 @@
    ========================= */
 .alert .title-table {
   text-align: center;
-  /* Esto centra específicamente el texto dentro del alert */
   margin: 0 auto;
-  /* Asegura que el texto esté completamente centrado */
 }
 
-.table-responsive {
+/* IMPORTANTE: Añade estos estilos que tienes en maestros */
+/* Scroll horizontal para tabla y paginador juntos */
+.table-scroll-wrapper {
   width: 100%;
   overflow-x: auto;
   min-height: 1px;
   margin: 0 auto;
-  background: #fff;
+  background: #fff; /* Puedes usar variable si la tienes: var(--table-bg, #fff) */
   border-radius: 12px;
   box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
 }
 
 .table {
@@ -148,23 +150,19 @@ table {
 .title-perfil,
 .title-table {
   display: block;
-  /* nos permite controlar separación con margin */
   line-height: 1.1;
   text-wrap: balance;
-  /* evita líneas huérfanas (soporte moderno) */
   overflow-wrap: anywhere;
-  /* defensa ante nombres muy largos */
   letter-spacing: 0;
   text-transform: capitalize;
   opacity: 1;
   font-family: Nexa-Bold;
 }
 
-/* Saludo: “Bienvenido {user}” (base desktop/tablet) */
+/* Saludo: "Bienvenido {user}" (base desktop/tablet) */
 .title-perfil {
   margin-left: 3rem;
   font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2.25rem);
-  /* ~22–36px */
   text-align: left;
   color: #231F20;
 }
@@ -173,7 +171,6 @@ table {
 .title-table {
   margin-left: 3rem;
   font-size: clamp(1.125rem, 0.95rem + 0.9vw, 1.875rem);
-  /* ~18–30px */
   text-align: center;
   color: #231F20;
 }
@@ -197,8 +194,6 @@ table {
    (ocultamos los <br> y gestionamos el gap con margin)
    =============================================================== */
 @media (min-width: 576px) and (max-width: 699px) {
-
-  /* Suprimimos los saltos <br> que generan separación innecesaria */
   .row.mt-5.mb-5>.col-12 br {
     display: none;
   }
@@ -207,26 +202,21 @@ table {
   .title-table {
     text-align: left;
     margin-left: 1.5rem;
-    /* más ancho útil en esta franja */
   }
 
-  /* Saludo */
   .row .col-12 .title-perfil:first-of-type {
     font-size: clamp(1.25rem, 1.0rem + 1.1vw, 1.9rem);
     line-height: 1.15;
     margin-bottom: 0.4rem;
   }
 
-  /* Rol “Administrador” (izquierda, sin centrar) */
   .row .col-12 .title-perfil:last-of-type {
     text-align: left;
     font-size: clamp(1.2rem, 0.95rem + 1vw, 1.7rem);
     line-height: 1.15;
     margin-top: 0.25rem;
-    /* separación controlada entre títulos */
   }
 
-  /* Anula la separación extra del contenedor Bootstrap */
   .row.mt-5.mb-5>.col-12 {
     margin-top: 1rem !important;
     margin-bottom: 0.75rem !important;
@@ -238,14 +228,13 @@ table {
 }
 
 /* ===============================================================
-   “Bisagra” 700–740 px — IZQUIERDA y sin salto visual (caso 700 px)
+   "Bisagra" 700–740 px — IZQUIERDA y sin salto visual (caso 700 px)
    =============================================================== */
 @media (min-width: 700px) and (max-width: 740px) {
   .row.mt-5.mb-5>.col-12 br {
     display: none;
   }
 
-  /* elimina los 2 <br> */
   .title-perfil,
   .title-table {
     text-align: left;
@@ -266,7 +255,6 @@ table {
    — Ambos títulos a la izquierda (comportamiento natural)
    ========================= */
 @media (min-width: 741px) {
-
   .title-perfil,
   .title-table {
     text-align: left;
@@ -275,7 +263,6 @@ table {
 
   .row .col-12 .title-perfil:last-of-type {
     font-size: clamp(1.25rem, 1rem + 1.1vw, 1.875rem);
-    /* ~20–30px */
     line-height: 1.15;
   }
 }
@@ -287,8 +274,6 @@ table {
    — Tamaños algo mayores
    =========================================== */
 @media (max-width: 575px) {
-
-  /* Quitamos los <br> para controlar el gap con margin */
   .row.mt-5.mb-5>.col-12 br {
     display: none;
   }
@@ -299,25 +284,18 @@ table {
     text-align: center;
   }
 
-  /* Saludo: centrado, un poco mayor */
   .row .col-12 .title-perfil:first-of-type {
     font-size: clamp(1.35rem, 1.1rem + 1.6vw, 2rem);
-    /* ~22–32px */
     line-height: 1.15;
     margin-bottom: 0.35rem;
-    /* poco espacio */
   }
 
-  /* Rol “Administrador”: centrado y algo mayor */
   .row .col-12 .title-perfil:last-of-type {
     font-size: clamp(1.4rem, 1.15rem + 1.7vw, 2.1rem);
-    /* ~22–33px */
     line-height: 1.15;
     margin-top: 0.25rem;
-    /* muy pegado al saludo */
   }
 
-  /* Compacta los espacios del bloque contenedor */
   .row.mt-5.mb-5>.col-12 {
     margin-top: 0.9rem !important;
     margin-bottom: 0.7rem !important;
@@ -329,7 +307,6 @@ table {
     padding: 0 8px;
   }
 
-  /* Tabla legible en pantallas chicas */
   .mat-mdc-header-cell {
     font-size: 16px;
   }
@@ -339,8 +316,10 @@ table {
     line-height: 1.25;
   }
 
-  .table-responsive {
+  .table-scroll-wrapper {
     -webkit-overflow-scrolling: touch;
+    margin: 0 8px;
+    width: calc(100% - 16px);
   }
 }
 
@@ -351,25 +330,24 @@ table {
 @media (max-width: 992px) and (min-width: 805px) {
   .container {
     max-width: 95vw;
-    width: 130%;
+    width: 100%;
     margin: 0 auto;
   }
 
-  .table-responsive {
+  .table-scroll-wrapper {
     max-width: 95vw;
     margin: 0 auto;
     width: 100%;
   }
 
-  .table {
-    min-width: 700px;
+  table {
+    min-width: 1400px;
     width: 100%;
   }
 }
 
 /* =========================
    Opcional: truncar SOLO el nombre en mobile
-   (si envuelve {{name_user}} en <strong class="user-name">)
    ========================= */
 @media (max-width: 575px) {
   .user-name {
